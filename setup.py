@@ -14,7 +14,7 @@ setuptools.setup(
     description="A way to write LaTeX in python without being bound to existing higher level structures.",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/hackla-engage/simple-pylatex",
+    url="https://github.com/hackla-engage/simple-latex",
     packages=setuptools.find_packages(),
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",

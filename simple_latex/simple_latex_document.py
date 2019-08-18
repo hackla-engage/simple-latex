@@ -27,9 +27,9 @@ class SimpleLatexDocument:
             repr += str(self.special)
         return repr
 
-    def pdf(self, directory_for_conversion, file_name_output, clean_output_directory=True):
+    def pdf(self, directory_for_conversion, file_name_output, clean_output_directory=True, DEBUG = False):
         try:
-            latex_file_path = path.join(
+            latex_file_path = os.path.join(
                 directory_for_conversion, file_name_output)
             if not os.path.exists(directory_for_conversion):
                 os.makedirs(directory_for_conversion)
@@ -40,8 +40,8 @@ class SimpleLatexDocument:
             output = subprocess.check_output(["latexmk", "-pdf", latex_file_path],
                                              stderr=subprocess.STDOUT)
             if clean_output_directory:
-                subprocess.Popen(["latexmk", "-c", directory_for_conversion])
-            subprocess.Popen(["rm", latex_file_path])
+                cleaning = subprocess.check_output(["latexmk", "-c"], stderr=subprocess.STDOUT)
+                cleaning = subprocess.check_output(["rm", "-f", latex_file_path], stderr=subprocess.STDOUT)
         except (OSError, ValueError) as exc:
             raise RuntimeError
         except Exception as exc:

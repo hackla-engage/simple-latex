@@ -128,4 +128,4 @@ document.add(EndClass("needbox"))
 document.add(Command("thispagestyle", values=["fancy"]))
 sld.add(document)
 
-sld.pdf("/Users/eliselkin/pdf", "something.pdf")
+sld.pdf("/Users/eliselkin/pdf", "something.tex", clean_output_directory=True, DEBUG=False)
