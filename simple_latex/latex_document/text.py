@@ -2,7 +2,7 @@ from .baseclass import DocumentBaseClass
 
 
 class TextClass(DocumentBaseClass):
-    def __init__(self, environment, include_extra_newline_after=False):
+    def __init__(self, text, include_extra_newline_after=False):
         self.text = text
         self.include_extra_newline_after = include_extra_newline_after
 
