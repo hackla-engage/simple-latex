@@ -1,5 +1,5 @@
 from .baseclass import DocumentBaseClass
-from ..utils.transformations import transform_dict_to_kv_list
+from ..utils import transform_dict_to_kv_list
 
 
 class BeginClass(DocumentBaseClass):

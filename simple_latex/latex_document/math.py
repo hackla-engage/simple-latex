@@ -7,7 +7,7 @@ class MathClass(DocumentBaseClass):
     
     def __repr__(self):
         if self.inline:
-            beginend = "$$$$"
-        else:
             beginend = "$$"
+        else:
+            beginend = "$"
         

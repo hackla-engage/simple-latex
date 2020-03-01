@@ -1,15 +1,16 @@
 from .baseclass import UniversalBaseClass
-from ..utils import transform_dict_to_kv_list
-
+from ..utils import transform_dict_to_kv_list, latex_escape_regular_text
 
 class Command(UniversalBaseClass):
-    def __init__(self, command, optional={}, parameters={}, values=[], text=None, starred=False):
+    def __init__(self, command, optional={}, parameters={}, values=[], text=None, starred=False, escapeValues=True, escapeText=True):
         self.command = command
         self.values = values
         self.text = text
         self.starred = starred
         self.parameters = parameters
         self.optional = optional
+        self.escapeText = escapeText
+        self.escapeValues = escapeValues
 
     def __repr__(self):
         """
@@ -28,7 +29,14 @@ class Command(UniversalBaseClass):
             repr += "[{}]".format(transform_dict_to_kv_list(self.parameters))
         if self.values:
             for value in self.values:
-                repr += "{{{}}}".format(value)
+                if self.escapeValues:
+                    replaced = latex_escape_regular_text(value)
+                    repr += "{{{}}}".format(replaced)
+                else:
+                    repr += "{{{}}}".format(value)
         if self.text is not None:
-            repr += " {}".format(self.text)
+            if self.escapeText:
+                repr += " {}".format(latex_escape_regular_text(self.text))
+            else:
+                repr += " {}".format(self.text)
         return repr + "\n"

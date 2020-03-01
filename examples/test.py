@@ -34,11 +34,11 @@ preamble.add(Package("xcolor"))
 preamble.add(Package("lastpage"))
 preamble.add(Package("titlesec"))
 preamble.add(Package("mdframed", {"framemethod": "tikz"}))
-preamble.add(Command("hypersetup", values=["colorlinks=false, linktoc=all, linkcolor=black"]))
+preamble.add(Command("hypersetup", values=["colorlinks=false, linktoc=all, linkcolor=black, hidelinks"]))
 preamble.add(Command(command="titleformat",
                      optional="\\chapter",
                      parameters={"display": None},
-                     values=["\\normalfont\\huge\\bfseries", "", "0pt", "\\Huge"]))
+                     values=["\\normalfont\\huge\\bfseries", "", "0pt", "\\Huge"], escapeText=False, escapeValues=False))
 preamble.add(Command("titlespacing", "\\chapter", values=[
              "0pt", "-30pt", "20pt"], starred=True))
 preamble.add(Command("pagestyle", values=["fancy"]))
@@ -51,7 +51,7 @@ preamble.add(Command("fancyhead", parameters={
 preamble.add(Command("fancyhead", parameters={
              "L": None}, values=["\\rightmark"]))
 preamble.add(Command("fancyfoot", parameters={"R": None}, values=[
-             "\\thepage \\ of \\pageref{LastPage}"]))
+             "\\thepage \\ of \\pageref{LastPage}"], escapeValues=False))
 preamble.add(Command("newmdenv", parameters={
              "tikzsetting": "{fill=blue, draw=white}",
              "innerlinewidth": "0.5pt",
@@ -102,7 +102,7 @@ document.add(Command("maketitle"))
 document.add(Command("thispagestyle", values=["fancy"]))
 document.add(Command("tableofcontents"))
 document.add(Command("thispagestyle", values=["fancy"]))
-document.add(Command("chapter", values=["Item 3430", "Adoption of a revised Resolution to Adopt the Local Coastal Program Land Use Plan Update"]))
+document.add(Command("chapter", values=["Item 3430", "Award Bid #4369 and enter into agreement with Mariposa Landscapes, Inc. for Citywide Landscape Maintenance Services"]))
 document.add(Command("thispagestyle", values=["fancy"]))
 document.add(BeginClass("probox"))
 document.add(Command("textbf", values=[Command("color", values=["white"], text="Pro feedback")]))
@@ -127,5 +127,5 @@ document.add(Command("textbf", values=[Command("color", values=["white"], text="
 document.add(EndClass("needbox"))
 document.add(Command("thispagestyle", values=["fancy"]))
 sld.add(document)
-
-sld.pdf("/Users/eliselkin/pdf", "something.tex", clean_output_directory=True, DEBUG=False)
+# sld.tex("/Users/eliselkin/pdf", "somethingsomething.tex")
+sld.pdf("/Users/eliselkin/pdfs", "something.tex", clean_output_directory=True, DEBUG=False)

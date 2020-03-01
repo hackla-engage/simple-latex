@@ -27,7 +27,15 @@ class SimpleLatexDocument:
             repr += str(self.special)
         return repr
 
-    def pdf(self, directory_for_conversion, file_name_output, clean_output_directory=True, DEBUG = False):
+    def tex(self, directory, file_name_output):
+        latex_file_path = os.path.join(
+            directory, file_name_output)
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+        with open(latex_file_path, 'w') as latex_outfp:
+            latex_outfp.write(str(self))
+
+    def pdf(self, directory_for_conversion, file_name_output, clean_output_directory=True, DEBUG=False):
         try:
             latex_file_path = os.path.join(
                 directory_for_conversion, file_name_output)
@@ -40,12 +48,13 @@ class SimpleLatexDocument:
             output = subprocess.check_output(["latexmk", "-pdf", latex_file_path],
                                              stderr=subprocess.STDOUT)
             if clean_output_directory:
-                cleaning = subprocess.check_output(["latexmk", "-c"], stderr=subprocess.STDOUT)
-                cleaning = subprocess.check_output(["rm", "-f", latex_file_path], stderr=subprocess.STDOUT)
+                cleaning = subprocess.check_output(
+                    ["latexmk", "-c"], stderr=subprocess.STDOUT)
+                cleaning = subprocess.check_output(
+                    ["rm", "-f", latex_file_path], stderr=subprocess.STDOUT)
+            if DEBUG:
+                print(output.decode())
         except (OSError, ValueError) as exc:
             raise RuntimeError
         except Exception as exc:
             print(exc)
-        finally:
-            if DEBUG:
-                print(output.decode())

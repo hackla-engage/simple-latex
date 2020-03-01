@@ -1,3 +1,3 @@
-from .transformations import transform_dict_to_kv_list
+from .transformations import transform_dict_to_kv_list, latex_escape_regular_text
 
-all = ['transform_dict_to_kv_list']
+all = ['transform_dict_to_kv_list', 'latex_escape_regular_text']
